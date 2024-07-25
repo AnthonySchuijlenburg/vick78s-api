@@ -2,6 +2,7 @@
 
 namespace App\JsonApi\V1;
 
+use App\JsonApi\V1\Cars\CarSchema;
 use App\JsonApi\V1\Events\EventSchema;
 use App\JsonApi\V1\NewsItems\NewsItemSchema;
 use App\JsonApi\V1\Sponsors\SponsorSchema;
@@ -31,6 +32,7 @@ class Server extends BaseServer
             SponsorSchema::class,
             EventSchema::class,
             NewsItemSchema::class,
+            CarSchema::class,
         ];
     }
 }

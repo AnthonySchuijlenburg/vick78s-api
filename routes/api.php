@@ -16,4 +16,5 @@ JsonApiRoute::server('v1')
         $server->resource('sponsors', JsonApiController::class)->readOnly();
         $server->resource('events', JsonApiController::class)->readOnly();
         $server->resource('news-items', JsonApiController::class)->readOnly();
+        $server->resource('cars', JsonApiController::class)->readOnly();
     });
