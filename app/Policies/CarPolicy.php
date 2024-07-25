@@ -24,6 +24,14 @@ class CarPolicy
     }
 
     /**
+     * Determine whether the user can view the model's related events.
+     */
+    public function viewEvents(?User $user, Car $car): bool
+    {
+        return true;
+    }
+
+    /**
      * Determine whether the user can create models.
      */
     public function create(User $user): bool

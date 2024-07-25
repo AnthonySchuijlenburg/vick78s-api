@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Car;
+use App\Models\Event;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -41,5 +42,10 @@ class CarFactory extends Factory
             ],
             'weight' => $this->faker->numberBetween(0, 100),
         ];
+    }
+
+    public function withEvents(int $count = 5): self
+    {
+        return $this->has(Event::factory()->count($count));
     }
 }

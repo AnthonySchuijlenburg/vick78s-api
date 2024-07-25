@@ -2,6 +2,7 @@
 
 namespace JsonApi;
 
+use App\Models\Car;
 use App\Models\Event;
 
 class EventsTest extends \Tests\JsonApiTestCase
@@ -31,5 +32,21 @@ class EventsTest extends \Tests\JsonApiTestCase
 
         $response->assertOk();
         $response->assertFetchedOne($event);
+    }
+
+    public function testItFindEventsCar()
+    {
+        $car = Car::factory()
+            ->withEvents(1)
+            ->create();
+        $event = $car->events->first();
+
+        $response = $this
+            ->jsonApi()
+            ->expects('cars')
+            ->get('/api/v1/events/'.$event->getRouteKey().'/car');
+
+        $response->assertOk();
+        $response->assertFetchedOne($car);
     }
 }

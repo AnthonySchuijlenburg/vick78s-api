@@ -22,7 +22,7 @@ return new class extends Migration
 
             // Needs to become a relationship to the car entity.
             // This will be done once the car entity is created.
-            $table->string('car');
+            $table->string('car')->nullable();
             $table->string('class');
 
             $table->timestamps();

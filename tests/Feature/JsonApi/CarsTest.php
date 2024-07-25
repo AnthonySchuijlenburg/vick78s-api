@@ -33,4 +33,23 @@ class CarsTest extends JsonApiTestCase
         $response->assertOk();
         $response->assertFetchedOne($car);
     }
+
+    public function testItFindCarsEvents()
+    {
+        $car = Car::factory()
+            ->withEvents()
+            ->create();
+
+        $response = $this
+            ->jsonApi()
+            ->expects('events')
+            ->get('/api/v1/cars/'.$car->getRouteKey().'/events');
+
+        $response->assertOk();
+        $response->assertFetchedManyInOrder(
+            $car->events()
+                ->orderBy('start_date')
+                ->get()
+        );
+    }
 }

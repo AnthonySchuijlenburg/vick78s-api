@@ -14,7 +14,15 @@ JsonApiRoute::server('v1')
     ->prefix('v1')
     ->resources(function (ResourceRegistrar $server) {
         $server->resource('sponsors', JsonApiController::class)->readOnly();
-        $server->resource('events', JsonApiController::class)->readOnly();
+        $server->resource('events', JsonApiController::class)
+            ->readOnly()
+            ->relationships(function ($relations) {
+                $relations->hasOne('car')->readOnly();
+            });
         $server->resource('news-items', JsonApiController::class)->readOnly();
-        $server->resource('cars', JsonApiController::class)->readOnly();
+        $server->resource('cars', JsonApiController::class)
+            ->readOnly()
+            ->relationships(function ($relations) {
+                $relations->hasMany('events')->readOnly();
+            });
     });

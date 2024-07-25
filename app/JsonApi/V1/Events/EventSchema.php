@@ -6,6 +6,7 @@ use App\Models\Event;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
 use LaravelJsonApi\Eloquent\Fields\DateTime;
 use LaravelJsonApi\Eloquent\Fields\ID;
+use LaravelJsonApi\Eloquent\Fields\Relations\BelongsTo;
 use LaravelJsonApi\Eloquent\Fields\Str;
 use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
 use LaravelJsonApi\Eloquent\Pagination\PagePagination;
@@ -32,7 +33,7 @@ class EventSchema extends Schema
             DateTime::make('startDate')->sortable(),
             DateTime::make('endDate')->sortable(),
             Str::make('date'),
-            Str::make('car'),
+            BelongsTo::make('car')->type('cars')->readOnly(),
             Str::make('class'),
             DateTime::make('createdAt')->sortable()->readOnly(),
             DateTime::make('updatedAt')->sortable()->readOnly(),
