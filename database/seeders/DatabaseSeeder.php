@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             SponsorSeeder::class,
             EventSeeder::class,
             NewsItemSeeder::class,
+            CarSeeder::class,
         ]);
     }
 }
