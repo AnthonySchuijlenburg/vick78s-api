@@ -14,4 +14,5 @@ JsonApiRoute::server('v1')
     ->prefix('v1')
     ->resources(function (ResourceRegistrar $server) {
         $server->resource('sponsors', JsonApiController::class)->readOnly();
+        $server->resource('events', JsonApiController::class)->readOnly();
     });
