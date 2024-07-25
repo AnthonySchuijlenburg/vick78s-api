@@ -13,11 +13,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        if (User::all()->count() == 0) {
+            User::factory()->create([
+                'name' => 'admin',
+                'email' => 'admin@example.com',
+            ]);
+        }
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        User::factory(10)->create();
+
+        $this->call([
+            SponsorSeeder::class,
         ]);
     }
 }
