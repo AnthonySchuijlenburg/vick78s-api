@@ -20,6 +20,7 @@ class SponsorFactory extends Factory
             'name' => $this->faker->company,
             'logo' => $this->faker->imageUrl,
             'url' => $this->faker->url,
+            'weight' => $this->faker->numberBetween(1, 100),
         ];
     }
 }
