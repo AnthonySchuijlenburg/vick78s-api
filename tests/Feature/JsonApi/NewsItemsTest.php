@@ -2,7 +2,6 @@
 
 namespace JsonApi;
 
-use App\Models\Event;
 use App\Models\NewsItem;
 
 class NewsItemsTest extends \Tests\JsonApiTestCase
@@ -10,7 +9,7 @@ class NewsItemsTest extends \Tests\JsonApiTestCase
     public function testItListsNewsItems()
     {
         NewsItem::factory()->count(3)->create();
-        $newsItems = NewsItem::all()->sortBy('published_at', null,'desc');
+        $newsItems = NewsItem::all()->sortBy('published_at', null, 'desc');
 
         $response = $this
             ->jsonApi()
