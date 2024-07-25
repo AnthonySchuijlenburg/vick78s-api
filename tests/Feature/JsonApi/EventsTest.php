@@ -20,7 +20,7 @@ class EventsTest extends \Tests\JsonApiTestCase
         $response->assertFetchedManyInOrder($events);
     }
 
-    public function testItFindSponsor()
+    public function testItFindEvent()
     {
         $event = Event::factory()->create();
 

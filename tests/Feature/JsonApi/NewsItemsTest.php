@@ -20,7 +20,7 @@ class NewsItemsTest extends \Tests\JsonApiTestCase
         $response->assertFetchedManyInOrder($newsItems);
     }
 
-    public function testItFindSponsor()
+    public function testItFindNewsItem()
     {
         $newsItem = NewsItem::factory()->create();
 
