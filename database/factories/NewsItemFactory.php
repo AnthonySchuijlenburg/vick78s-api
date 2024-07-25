@@ -2,11 +2,12 @@
 
 namespace Database\Factories;
 
+use App\Models\NewsItem;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\NewsItem>
+ * @extends Factory<NewsItem>
  */
 class NewsItemFactory extends Factory
 {

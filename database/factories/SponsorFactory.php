@@ -2,10 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\sponsor;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\sponsor>
+ * @extends Factory<sponsor>
  */
 class SponsorFactory extends Factory
 {
