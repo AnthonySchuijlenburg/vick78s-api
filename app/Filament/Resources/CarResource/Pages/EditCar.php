@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\CarResource\Pages;
 
 use App\Filament\Resources\CarResource;
-use Filament\Actions;
+use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 
 class EditCar extends EditRecord
@@ -12,8 +12,14 @@ class EditCar extends EditRecord
 
     protected function getHeaderActions(): array
     {
-        return [
-            Actions\DeleteAction::make(),
-        ];
+        $record = $this->getRecord();
+
+        $actions = [];
+
+        if ($record->events()->count() === 0) {
+            $actions[] = DeleteAction::make();
+        }
+
+        return $actions;
     }
 }

@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\CarResource\Pages\CreateCar;
 use App\Filament\Resources\CarResource\Pages\EditCar;
 use App\Filament\Resources\CarResource\Pages\ListCars;
+use App\Filament\Resources\CarResource\RelationManagers\EventsRelationManager;
 use App\Models\Car;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput;
@@ -121,7 +122,7 @@ class CarResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            EventsRelationManager::class,
         ];
     }
 
