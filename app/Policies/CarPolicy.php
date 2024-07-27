@@ -36,7 +36,7 @@ class CarPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -44,7 +44,7 @@ class CarPolicy
      */
     public function update(User $user, Car $car): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -52,22 +52,6 @@ class CarPolicy
      */
     public function delete(User $user, Car $car): bool
     {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Car $car): bool
-    {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Car $car): bool
-    {
-        return false;
+        return true;
     }
 }
