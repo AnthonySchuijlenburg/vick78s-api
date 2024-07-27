@@ -28,7 +28,7 @@ class SponsorPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -36,7 +36,7 @@ class SponsorPolicy
      */
     public function update(User $user, Sponsor $sponsor): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -44,22 +44,6 @@ class SponsorPolicy
      */
     public function delete(User $user, Sponsor $sponsor): bool
     {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Sponsor $sponsor): bool
-    {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Sponsor $sponsor): bool
-    {
-        return false;
+        return true;
     }
 }
