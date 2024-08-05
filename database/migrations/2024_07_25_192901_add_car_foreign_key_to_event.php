@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::table('events', function (Blueprint $table) {
             $table->dropColumn('car');
 
-            $table->foreignIdFor(Car::class)
+            $table->foreignIdFor(Car::class, 'car_id')
                 ->after('date')
                 ->nullable()
                 ->constrained();
