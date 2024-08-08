@@ -9,6 +9,7 @@ use App\Models\NewsItem;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables\Actions\DeleteAction;
@@ -32,12 +33,19 @@ class NewsItemResource extends Resource
             ->schema([
                 TextInput::make('title')
                     ->live()
-                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state)))
+                    ->afterStateUpdated(function (Get $get, Set $set, ?string $old, ?string $state) {
+                        if (($get('slug') ?? '') !== Str::slug($old)) {
+                            return;
+                        }
+
+                        $set('slug', Str::slug($state));
+                    })
                     ->required()
                     ->maxLength(255),
                 TextInput::make('slug')
-                    ->unique(ignoreRecord: true)
-                    ->disabled(),
+                    ->required()
+                    ->maxLength(255)
+                    ->unique(ignoreRecord: true),
                 DateTimePicker::make('published_at')
                     ->required(),
                 TiptapEditor::make('content')
