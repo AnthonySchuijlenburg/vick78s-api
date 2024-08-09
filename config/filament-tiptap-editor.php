@@ -72,7 +72,7 @@ return [
     'image_crop_aspect_ratio' => '16:9',
     'image_resize_target_width' => '1920',
     'image_resize_target_height' => '1080',
-    'use_relative_paths' => true,
+    'use_relative_paths' => false,
 
     /*
     |--------------------------------------------------------------------------

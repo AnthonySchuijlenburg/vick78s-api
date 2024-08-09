@@ -3,6 +3,7 @@
 namespace App\JsonApi\V1\Cars;
 
 use App\Models\Car;
+use Illuminate\Support\Facades\Storage;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
 use LaravelJsonApi\Eloquent\Fields\ArrayHash;
 use LaravelJsonApi\Eloquent\Fields\DateTime;
@@ -34,7 +35,10 @@ class CarSchema extends Schema
             Str::make('model_year'),
             Str::make('engine'),
             Str::make('transmission'),
-            Str::make('image_url'),
+            Str::make('image_url')
+                ->serializeUsing(
+                    fn ($value) => $value ? asset(Storage::url($value)) : null,
+                ),
             ArrayHash::make('content'),
             Str::make('weight')->sortable(),
             HasMany::make('events')->type('events')->readOnly(),

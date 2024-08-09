@@ -3,6 +3,7 @@
 namespace App\JsonApi\V1\ImageCollections;
 
 use App\Models\ImageCollection;
+use Illuminate\Support\Facades\Storage;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
 use LaravelJsonApi\Eloquent\Fields\ArrayHash;
 use LaravelJsonApi\Eloquent\Fields\DateTime;
@@ -33,7 +34,12 @@ class ImageCollectionSchema extends Schema
             Str::make('slug'),
             Number::make('weight')->sortable(),
             Str::make('made_by'),
-            ArrayHash::make('image_urls'),
+            ArrayHash::make('image_urls')
+                ->serializeUsing(
+                    fn ($value) => $value
+                        ? array_map(fn ($item) => asset(Storage::url($item)), $value)
+                        : null,
+                ),
             DateTime::make('createdAt')->sortable()->readOnly(),
             DateTime::make('updatedAt')->sortable()->readOnly(),
         ];

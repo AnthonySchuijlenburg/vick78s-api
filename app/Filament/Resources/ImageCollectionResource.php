@@ -9,6 +9,8 @@ use App\Models\ImageCollection;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteAction;
@@ -16,6 +18,7 @@ use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Support\Str;
 
 class ImageCollectionResource extends Resource
 {
@@ -28,8 +31,20 @@ class ImageCollectionResource extends Resource
         return $form
             ->schema([
                 TextInput::make('title')
+                    ->live()
+                    ->afterStateUpdated(function (Get $get, Set $set, ?string $old, ?string $state) {
+                        if (($get('slug') ?? '') !== Str::slug($old)) {
+                            return;
+                        }
+
+                        $set('slug', Str::slug($state));
+                    })
                     ->required()
                     ->maxLength(255),
+                TextInput::make('slug')
+                    ->required()
+                    ->maxLength(255)
+                    ->unique(ignoreRecord: true),
                 TextInput::make('weight')
                     ->required()
                     ->numeric(),

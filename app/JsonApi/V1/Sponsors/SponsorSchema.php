@@ -3,6 +3,7 @@
 namespace App\JsonApi\V1\Sponsors;
 
 use App\Models\Sponsor;
+use Illuminate\Support\Facades\Storage;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
 use LaravelJsonApi\Eloquent\Fields\DateTime;
 use LaravelJsonApi\Eloquent\Fields\ID;
@@ -29,7 +30,10 @@ class SponsorSchema extends Schema
         return [
             ID::make()->uuid(),
             Str::make('name'),
-            Str::make('logo'),
+            Str::make('logo')
+                ->serializeUsing(
+                    fn ($value) => $value ? asset(Storage::url($value)) : null,
+                ),
             Str::make('url'),
             Number::make('weight')->sortable(),
             DateTime::make('createdAt')->sortable()->readOnly(),
