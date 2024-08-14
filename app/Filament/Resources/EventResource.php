@@ -41,7 +41,7 @@ class EventResource extends Resource
                         Action::make('view')
                             ->icon('heroicon-o-eye')
                             ->label('View')
-                            ->url(fn (Event $record): string => route('filament.admin.resources.cars.edit', $record->car)),
+                            ->url(fn (?Event $record): string => $record ? route('filament.admin.resources.cars.edit', $record->car) : '#'),
                         true
 
                     )
