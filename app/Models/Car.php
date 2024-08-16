@@ -31,4 +31,9 @@ class Car extends Model
     {
         return $this->hasMany(Event::class);
     }
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
 }

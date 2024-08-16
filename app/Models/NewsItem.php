@@ -22,4 +22,9 @@ class NewsItem extends Model
         'content' => 'json',
         'published_at' => 'datetime',
     ];
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
 }

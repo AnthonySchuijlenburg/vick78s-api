@@ -27,9 +27,8 @@ class NewsItemSchema extends Schema
     public function fields(): array
     {
         return [
-            ID::make()->uuid(),
+            ID::make()->matchAs('[a-z0-9-]+'),
             Str::make('title'),
-            Str::make('slug'),
             ArrayHash::make('content'),
             DateTime::make('publishedAt')->sortable()->readOnly(),
             DateTime::make('createdAt')->sortable()->readOnly(),
