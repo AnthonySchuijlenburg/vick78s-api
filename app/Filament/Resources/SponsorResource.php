@@ -30,7 +30,6 @@ class SponsorResource extends Resource
                     ->required()
                     ->maxLength(255),
                 TextInput::make('url')
-                    ->required()
                     ->url()
                     ->maxLength(255),
                 TextInput::make('weight')

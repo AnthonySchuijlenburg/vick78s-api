@@ -25,4 +25,5 @@ JsonApiRoute::server('v1')
             ->relationships(function ($relations) {
                 $relations->hasMany('events')->readOnly();
             });
+        $server->resource('image-collections', JsonApiController::class)->readOnly();
     });

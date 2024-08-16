@@ -2,29 +2,29 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CarResource\Pages\CreateCar;
-use App\Filament\Resources\CarResource\Pages\EditCar;
-use App\Filament\Resources\CarResource\Pages\ListCars;
-use App\Filament\Resources\CarResource\RelationManagers\EventsRelationManager;
-use App\Models\Car;
-use Filament\Forms;
+use App\Filament\Resources\ImageCollectionResource\Pages\CreateImageCollection;
+use App\Filament\Resources\ImageCollectionResource\Pages\EditImageCollection;
+use App\Filament\Resources\ImageCollectionResource\Pages\ListImageCollections;
+use App\Models\ImageCollection;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Resources\Resource;
+use Filament\Tables\Actions\BulkActionGroup;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use FilamentTiptapEditor\TiptapEditor;
 use Illuminate\Support\Str;
 
-class CarResource extends Resource
+class ImageCollectionResource extends Resource
 {
-    protected static ?string $model = Car::class;
+    protected static ?string $model = ImageCollection::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-truck';
+    protected static ?string $navigationIcon = 'heroicon-o-camera';
 
     public static function form(Form $form): Form
     {
@@ -45,33 +45,27 @@ class CarResource extends Resource
                     ->required()
                     ->maxLength(255)
                     ->unique(ignoreRecord: true),
-                TextInput::make('model_year')
-                    ->required()
-                    ->numeric(),
                 TextInput::make('weight')
                     ->required()
                     ->numeric(),
-                TextInput::make('engine')
+                TextInput::make('made_by')
                     ->required()
                     ->maxLength(255),
-                TextInput::make('transmission')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\FileUpload::make('image_url')
+                FileUpload::make('image_urls')
                     ->image()
-                    ->directory('cars')
+                    ->multiple()
+                    ->reorderable()
+                    ->imageEditor()
+                    ->panelLayout('grid')
+                    ->appendFiles()
+                    ->directory('image-collections')
                     ->columnSpan(2)
                     ->visibility('public')
                     ->imageResizeMode('cover')
                     ->imageCropAspectRatio('16:9')
                     ->imageResizeTargetWidth('1920')
                     ->imageResizeTargetHeight('1080')
-                    ->downloadable()
-                    ->required(),
-                TiptapEditor::make('content')
-                    ->directory('cars/content')
-                    ->columnSpan(2)
-                    ->required(),
+                    ->downloadable(),
             ]);
     }
 
@@ -79,8 +73,9 @@ class CarResource extends Resource
     {
         return $table
             ->columns([
-                ImageColumn::make('image_url'),
                 TextColumn::make('title')
+                    ->sortable()
+                    ->searchable()
                     ->limit(50)
                     ->tooltip(function (TextColumn $column): ?string {
                         $state = $column->getState();
@@ -91,21 +86,13 @@ class CarResource extends Resource
 
                         // Only render the tooltip if the column content exceeds the length limit.
                         return $state;
-                    })
-                    ->sortable()
-                    ->searchable(),
-                TextColumn::make('model_year')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('engine')
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('transmission')
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    }),
                 TextColumn::make('weight')
                     ->numeric()
                     ->sortable(),
+                TextColumn::make('made_by')
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -115,31 +102,35 @@ class CarResource extends Resource
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
-            ->reorderable('weight')
             ->defaultSort('weight')
+            ->reorderable('weight')
             ->filters([
                 //
             ])
             ->actions([
                 EditAction::make(),
+                DeleteAction::make(),
             ])
             ->bulkActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
+                ]),
             ]);
     }
 
     public static function getRelations(): array
     {
         return [
-            EventsRelationManager::class,
+            //
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => ListCars::route('/'),
-            'create' => CreateCar::route('/create'),
-            'edit' => EditCar::route('/{record}/edit'),
+            'index' => ListImageCollections::route('/'),
+            'create' => CreateImageCollection::route('/create'),
+            'edit' => EditImageCollection::route('/{record}/edit'),
         ];
     }
 }
