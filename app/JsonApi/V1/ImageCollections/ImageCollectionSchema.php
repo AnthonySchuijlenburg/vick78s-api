@@ -29,9 +29,8 @@ class ImageCollectionSchema extends Schema
     public function fields(): array
     {
         return [
-            ID::make()->uuid(),
+            ID::make()->matchAs('[a-z0-9-]+'),
             Str::make('title'),
-            Str::make('slug'),
             Number::make('weight')->sortable(),
             Str::make('made_by'),
             ArrayHash::make('image_urls')

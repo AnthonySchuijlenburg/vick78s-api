@@ -50,7 +50,7 @@ class NewsItemResource extends Resource
                     ->required(),
                 TiptapEditor::make('content')
                     ->directory('news-items')
-                    ->columnSpan(2)
+                    ->columnSpan('full')
                     ->required(),
             ]);
     }

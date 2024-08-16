@@ -37,7 +37,7 @@ class SponsorResource extends Resource
                 Forms\Components\FileUpload::make('logo')
                     ->image()
                     ->directory('sponsors')
-                    ->columnSpan(2)
+                    ->columnSpan('full')
                     ->visibility('public')
                     ->maxSize(4096)
                     ->downloadable()

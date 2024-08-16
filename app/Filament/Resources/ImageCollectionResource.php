@@ -59,7 +59,7 @@ class ImageCollectionResource extends Resource
                     ->panelLayout('grid')
                     ->appendFiles()
                     ->directory('image-collections')
-                    ->columnSpan(2)
+                    ->columnSpan('full')
                     ->visibility('public')
                     ->imageResizeMode('cover')
                     ->imageCropAspectRatio('16:9')

@@ -60,7 +60,7 @@ class CarResource extends Resource
                 Forms\Components\FileUpload::make('image_url')
                     ->image()
                     ->directory('cars')
-                    ->columnSpan(2)
+                    ->columnSpan('full')
                     ->visibility('public')
                     ->imageResizeMode('cover')
                     ->imageCropAspectRatio('16:9')
@@ -70,7 +70,7 @@ class CarResource extends Resource
                     ->required(),
                 TiptapEditor::make('content')
                     ->directory('cars/content')
-                    ->columnSpan(2)
+                    ->columnSpan('full')
                     ->required(),
             ]);
     }

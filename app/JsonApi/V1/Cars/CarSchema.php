@@ -29,9 +29,8 @@ class CarSchema extends Schema
     public function fields(): array
     {
         return [
-            ID::make()->uuid(),
+            ID::make()->matchAs('[a-z0-9-]+'),
             Str::make('title'),
-            Str::make('slug'),
             Str::make('model_year'),
             Str::make('engine'),
             Str::make('transmission'),

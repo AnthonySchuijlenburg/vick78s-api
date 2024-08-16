@@ -22,4 +22,9 @@ class ImageCollection extends Model
     protected $casts = [
         'image_urls' => 'array',
     ];
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
 }
