@@ -27,11 +27,11 @@ class UserResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name')
-                    ->columnSpan(2)
+                    ->columnSpan('full')
                     ->required()
                     ->maxLength(255),
                 TextInput::make('email')
-                    ->columnSpan(2)
+                    ->columnSpan('full')
                     ->email()
                     ->required()
                     ->maxLength(255),
