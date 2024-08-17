@@ -3,12 +3,14 @@
 namespace JsonApi;
 
 use App\Models\NewsItem;
+use Illuminate\Testing\Assert;
+use Tests\JsonApiTestCase;
 
-class NewsItemsTest extends \Tests\JsonApiTestCase
+class NewsItemsTest extends JsonApiTestCase
 {
     public function testItListsNewsItems()
     {
-        NewsItem::factory()->count(3)->create();
+        NewsItem::factory()->published()->count(3)->create();
         $newsItems = NewsItem::all()->sortBy('published_at', null, 'desc');
 
         $response = $this
@@ -22,7 +24,7 @@ class NewsItemsTest extends \Tests\JsonApiTestCase
 
     public function testItFindNewsItem()
     {
-        $newsItem = NewsItem::factory()->create();
+        $newsItem = NewsItem::factory()->published()->create();
 
         $response = $this
             ->jsonApi()
@@ -31,5 +33,23 @@ class NewsItemsTest extends \Tests\JsonApiTestCase
 
         $response->assertOk();
         $response->assertFetchedOne($newsItem);
+    }
+
+    public function testItListsOnlyAvailableNewsItems()
+    {
+        NewsItem::factory()->published()->count(3)->create();
+        $newsItems = NewsItem::all()->sortBy('published_at', null, 'desc');
+
+        // Create a news item that is not yet published
+        NewsItem::factory()->scheduled()->create();
+
+        $response = $this
+            ->jsonApi()
+            ->expects('news-items')
+            ->get('/api/v1/news-items');
+
+        $response->assertOk();
+        $response->assertFetchedManyInOrder($newsItems);
+        Assert::assertCount(3, $response->json('data'));
     }
 }
