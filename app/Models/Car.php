@@ -2,11 +2,15 @@
 
 namespace App\Models;
 
+use Database\Factories\CarFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @method static CarFactory factory(...$parameters)
+ */
 class Car extends Model
 {
     use HasFactory;
