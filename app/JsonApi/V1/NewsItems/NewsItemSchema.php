@@ -10,6 +10,7 @@ use LaravelJsonApi\Eloquent\Fields\ID;
 use LaravelJsonApi\Eloquent\Fields\Str;
 use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
 use LaravelJsonApi\Eloquent\Pagination\PagePagination;
+use LaravelJsonApi\Eloquent\QueryBuilder\JsonApiBuilder;
 use LaravelJsonApi\Eloquent\Schema;
 
 class NewsItemSchema extends Schema
@@ -52,5 +53,18 @@ class NewsItemSchema extends Schema
     public function pagination(): ?Paginator
     {
         return PagePagination::make();
+    }
+
+    public function newQuery($query = null): JsonApiBuilder
+    {
+        if (! $query) {
+            $query = $this->newInstance()->newQuery();
+        }
+
+        return new JsonApiBuilder(
+            $this->server->schemas(),
+            $this,
+            $query->where('published_at', '<=', now()),
+        );
     }
 }

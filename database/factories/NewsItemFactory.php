@@ -38,4 +38,18 @@ class NewsItemFactory extends Factory
             'published_at' => $this->faker->dateTimeBetween('-1 year', '+1 year'),
         ];
     }
+
+    public function published(): self
+    {
+        return $this->state(fn (array $attributes) => [
+            'published_at' => $this->faker->dateTimeBetween('-1 year', '-1 day'),
+        ]);
+    }
+
+    public function scheduled(): self
+    {
+        return $this->state(fn (array $attributes) => [
+            'published_at' => $this->faker->dateTimeBetween('+1 day', '+1 year'),
+        ]);
+    }
 }
