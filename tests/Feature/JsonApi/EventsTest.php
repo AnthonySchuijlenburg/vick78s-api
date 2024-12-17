@@ -7,7 +7,7 @@ use App\Models\Event;
 
 class EventsTest extends \Tests\JsonApiTestCase
 {
-    public function testItListsEvents()
+    public function test_it_lists_events()
     {
         Event::factory()->count(3)->create();
         $events = Event::all()->sortBy('start_date');
@@ -21,7 +21,7 @@ class EventsTest extends \Tests\JsonApiTestCase
         $response->assertFetchedManyInOrder($events);
     }
 
-    public function testItFindEvent()
+    public function test_it_find_event()
     {
         $event = Event::factory()->create();
 
@@ -34,7 +34,7 @@ class EventsTest extends \Tests\JsonApiTestCase
         $response->assertFetchedOne($event);
     }
 
-    public function testItFindEventsCar()
+    public function test_it_find_events_car()
     {
         $car = Car::factory()
             ->withEvents(1)

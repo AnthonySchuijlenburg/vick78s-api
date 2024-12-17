@@ -7,7 +7,7 @@ use Tests\JsonApiTestCase;
 
 class CarsTest extends JsonApiTestCase
 {
-    public function testItListsCars()
+    public function test_it_lists_cars()
     {
         Car::factory()->count(3)->create();
         $cars = Car::all()->sortBy('weight');
@@ -21,7 +21,7 @@ class CarsTest extends JsonApiTestCase
         $response->assertFetchedManyInOrder($cars);
     }
 
-    public function testItFindCar()
+    public function test_it_find_car()
     {
         $car = Car::factory()->create();
 
@@ -34,7 +34,7 @@ class CarsTest extends JsonApiTestCase
         $response->assertFetchedOne($car);
     }
 
-    public function testItFindCarsEvents()
+    public function test_it_find_cars_events()
     {
         $car = Car::factory()
             ->withEvents()

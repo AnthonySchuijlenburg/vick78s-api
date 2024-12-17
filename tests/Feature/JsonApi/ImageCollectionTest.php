@@ -7,7 +7,7 @@ use Tests\JsonApiTestCase;
 
 class ImageCollectionTest extends JsonApiTestCase
 {
-    public function testItListsSponsors()
+    public function test_it_lists_sponsors()
     {
         ImageCollection::factory()->count(3)->create();
         $imageCollections = ImageCollection::all()->sortBy('weight');
@@ -21,7 +21,7 @@ class ImageCollectionTest extends JsonApiTestCase
         $response->assertFetchedManyInOrder($imageCollections);
     }
 
-    public function testItFindSponsor()
+    public function test_it_find_sponsor()
     {
         $imageCollection = ImageCollection::factory()->create();
 
