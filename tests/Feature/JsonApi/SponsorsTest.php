@@ -6,7 +6,7 @@ use App\Models\Sponsor;
 
 class SponsorsTest extends \Tests\JsonApiTestCase
 {
-    public function testItListsSponsors()
+    public function test_it_lists_sponsors()
     {
         Sponsor::factory()->count(3)->create();
         $sponsors = Sponsor::all()->sortBy('weight');
@@ -20,7 +20,7 @@ class SponsorsTest extends \Tests\JsonApiTestCase
         $response->assertFetchedManyInOrder($sponsors);
     }
 
-    public function testItFindSponsor()
+    public function test_it_find_sponsor()
     {
         $sponsor = Sponsor::factory()->create();
 

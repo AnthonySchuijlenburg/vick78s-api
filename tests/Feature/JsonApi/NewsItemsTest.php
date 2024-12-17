@@ -8,7 +8,7 @@ use Tests\JsonApiTestCase;
 
 class NewsItemsTest extends JsonApiTestCase
 {
-    public function testItListsNewsItems()
+    public function test_it_lists_news_items()
     {
         NewsItem::factory()->published()->count(3)->create();
         $newsItems = NewsItem::all()->sortBy('published_at', null, 'desc');
@@ -22,7 +22,7 @@ class NewsItemsTest extends JsonApiTestCase
         $response->assertFetchedManyInOrder($newsItems);
     }
 
-    public function testItFindNewsItem()
+    public function test_it_find_news_item()
     {
         $newsItem = NewsItem::factory()->published()->create();
 
@@ -35,7 +35,7 @@ class NewsItemsTest extends JsonApiTestCase
         $response->assertFetchedOne($newsItem);
     }
 
-    public function testItListsOnlyAvailableNewsItems()
+    public function test_it_lists_only_available_news_items()
     {
         NewsItem::factory()->published()->count(3)->create();
         $newsItems = NewsItem::all()->sortBy('published_at', null, 'desc');
