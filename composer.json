@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "ext-zip": "*",
         "awcodes/filament-tiptap-editor": "^3.0",
         "awcodes/overlook": "^2.2",
         "filament/filament": "^3.2",
@@ -14,11 +15,11 @@
         "laravel/framework": "11.31.0.0",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
+        "league/flysystem-aws-s3-v3": "^3.29",
         "pxlrbt/filament-environment-indicator": "^2.0",
         "sentry/sentry-laravel": "^4.8",
         "shuvroroy/filament-spatie-laravel-backup": "^2.2",
-        "spatie/laravel-backup": "^9.1",
-        "ext-zip": "*"
+        "spatie/laravel-backup": "^9.1"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
