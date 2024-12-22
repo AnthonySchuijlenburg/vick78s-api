@@ -152,7 +152,7 @@ return [
              */
             'disks' => [
                 'local',
-                'r2'
+                'r2',
             ],
         ],
 
