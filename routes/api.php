@@ -19,7 +19,6 @@ JsonApiRoute::server('v1')
             ->relationships(function ($relations) {
                 $relations->hasOne('car')->readOnly();
             });
-        $server->resource('news-items', JsonApiController::class)->readOnly();
         $server->resource('cars', JsonApiController::class)
             ->readOnly()
             ->relationships(function ($relations) {

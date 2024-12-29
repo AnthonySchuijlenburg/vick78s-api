@@ -5,7 +5,6 @@ namespace App\JsonApi\V1;
 use App\JsonApi\V1\Cars\CarSchema;
 use App\JsonApi\V1\Events\EventSchema;
 use App\JsonApi\V1\ImageCollections\ImageCollectionSchema;
-use App\JsonApi\V1\NewsItems\NewsItemSchema;
 use App\JsonApi\V1\Sponsors\SponsorSchema;
 use App\JsonApi\V1\Supporters\SupporterSchema;
 use LaravelJsonApi\Core\Server\Server as BaseServer;
@@ -33,7 +32,6 @@ class Server extends BaseServer
         return [
             SponsorSchema::class,
             EventSchema::class,
-            NewsItemSchema::class,
             CarSchema::class,
             ImageCollectionSchema::class,
             SupporterSchema::class,
