@@ -18,7 +18,6 @@ class Supporter extends Model
     protected $fillable = [
         'name',
         'active',
-        'weight',
     ];
 
     protected $casts = [
