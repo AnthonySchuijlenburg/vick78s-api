@@ -23,9 +23,9 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             SponsorSeeder::class,
-            NewsItemSeeder::class,
             CarSeeder::class,
             ImageCollectionSeeder::class,
+            SponsorSeeder::class,
         ]);
     }
 }

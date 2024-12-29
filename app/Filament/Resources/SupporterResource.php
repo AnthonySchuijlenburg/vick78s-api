@@ -24,10 +24,8 @@ class SupporterResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('weight')
-                    ->required()
-                    ->numeric(),
                 Forms\Components\Toggle::make('active')
+                    ->default(true)
                     ->inline(false)
                     ->required(),
             ]);
@@ -38,12 +36,10 @@ class SupporterResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\IconColumn::make('active')
                     ->boolean(),
-                Tables\Columns\TextColumn::make('weight')
-                    ->numeric()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -60,8 +56,8 @@ class SupporterResource extends Resource
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
-            ->defaultSort('weight')
-            ->reorderable('weight')
+            ->defaultPaginationPageOption(50)
+            ->defaultSort('name')
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),

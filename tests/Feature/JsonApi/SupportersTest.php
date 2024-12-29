@@ -9,7 +9,7 @@ class SupportersTest extends \Tests\JsonApiTestCase
     public function test_it_lists_supporters()
     {
         Supporter::factory()->count(3)->create(['active' => true]);
-        $supporters = Supporter::all()->sortBy('weight');
+        $supporters = Supporter::all()->sortBy('name');
 
         $response = $this
             ->jsonApi()
@@ -24,7 +24,7 @@ class SupportersTest extends \Tests\JsonApiTestCase
     {
         Supporter::factory()->count(3)->create(['active' => true]);
         Supporter::factory()->count(3)->create(['active' => false]);
-        $supporters = Supporter::all()->where('active', true)->sortBy('weight');
+        $supporters = Supporter::all()->where('active', true)->sortBy('name');
 
         $response = $this
             ->jsonApi()

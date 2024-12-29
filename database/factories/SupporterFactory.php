@@ -19,7 +19,6 @@ class SupporterFactory extends Factory
         return [
             'name' => fake()->name(),
             'active' => fake()->boolean(),
-            'weight' => fake()->numberBetween(0, 100),
         ];
     }
 }
