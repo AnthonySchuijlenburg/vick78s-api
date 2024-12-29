@@ -25,6 +25,7 @@ class SupporterResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\Toggle::make('active')
+                    ->default(true)
                     ->inline(false)
                     ->required(),
             ]);
